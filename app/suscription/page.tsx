@@ -1,4 +1,10 @@
+import { PricingTable } from '@clerk/nextjs';
+
 const Suscription = () => {
-  return <div>Suscription</div>;
+  return (
+    <div>
+      <PricingTable />
+    </div>
+  );
 };
 export default Suscription;

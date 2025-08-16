@@ -10,6 +10,8 @@ import { subjects, voices } from '@/constants';
 import FormInput from '../ui/form-input';
 import FormSelect from '../ui/form-select';
 import FormTextarea from '../ui/form-textarea';
+import { createCompanion } from '@/lib/actions/companion.actions';
+import { redirect } from 'next/navigation';
 
 // type FormData = {
 //   name: string;
@@ -54,10 +56,14 @@ const CompanionForm = () => {
     },
   });
 
-  const onSubmit = (values: FormData) => {
-    // Do something with the form values.
-    // ✅ This will be type-safe and validated.
-    console.log(values);
+  const onSubmit = async (values: FormData) => {
+    const companion = await createCompanion(values);
+    if (companion) {
+      redirect(`/companions/${companion.id}`);
+    } else {
+      console.log('Failed to create a companion');
+      redirect('/');
+    }
   };
 
   return (
